@@ -40,6 +40,6 @@ impl<T> ThreadPinned<T> {
         );
     }
 }
-
+//todo: safe implementation; excluding data race; same for /feather/old/server/types/src/task.rs
 unsafe impl<T> Send for ThreadPinned<T> {}
 unsafe impl<T> Sync for ThreadPinned<T> {}
