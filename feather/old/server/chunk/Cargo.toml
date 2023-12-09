@@ -11,7 +11,7 @@ feather-server-util = { path = "../util" }
 feather-server-worldgen = { path = "../worldgen" }
 
 fecs = { git = "https://github.com/feather-rs/fecs", rev = "0c4838d65b41ca059012b6e9147eabf0c275a731" }
-parking_lot = "0.10"
+parking_lot = "0.12.1"
 ahash = "0.3"
 rayon = "1.3"
 crossbeam = "0.7"

@@ -775,7 +775,7 @@ dependencies = [
  "nom_locate",
  "num-derive",
  "num-traits",
- "parking_lot 0.11.2",
+ "parking_lot 0.12.1",
  "quill-common",
  "rand 0.8.4",
  "rand_pcg",
@@ -837,7 +837,7 @@ dependencies = [
  "libcraft-inventory",
  "libcraft-items",
  "log",
- "parking_lot 0.11.2",
+ "parking_lot 0.12.1",
  "quill-common",
  "rand 0.8.4",
  "rayon",
@@ -925,7 +925,7 @@ dependencies = [
  "libcraft-core",
  "libcraft-items",
  "num-traits",
- "parking_lot 0.11.2",
+ "parking_lot 0.12.1",
  "quill-common",
  "serde",
  "thiserror",
@@ -961,7 +961,7 @@ dependencies = [
  "num-bigint",
  "num-traits",
  "once_cell",
- "parking_lot 0.11.2",
+ "parking_lot 0.12.1",
  "quill-common",
  "rand 0.8.4",
  "ring",
@@ -1391,7 +1391,7 @@ name = "libcraft-inventory"
 version = "0.1.0"
 dependencies = [
  "libcraft-items",
- "parking_lot 0.11.2",
+ "parking_lot 0.12.1",
 ]
 
 [[package]]

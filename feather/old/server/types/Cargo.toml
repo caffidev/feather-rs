@@ -20,7 +20,7 @@ thread_local = "1.0"
 bumpalo = { version = "3.2", features = ["collections"] }
 log = "0.4"
 flume = "0.7"
-parking_lot = "0.10"
+parking_lot = "0.12.1"
 anyhow = "1.0"
 inventory = "0.1"
 dashmap = "3.11"

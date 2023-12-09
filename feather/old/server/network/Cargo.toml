@@ -15,7 +15,7 @@ tokio-util = { version = "0.3", features = ["codec"] }
 flume = "0.7"
 derivative = "2.1"
 mojang-api = "0.6"
-parking_lot = "0.10"
+parking_lot = "0.12.1"
 log = "0.4"
 once_cell = "1.3"
 futures = "0.3"
