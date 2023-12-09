@@ -8,22 +8,27 @@ use serde::{Deserialize, Deserializer};
 
 use crate::{favicon::Favicon, Options};
 
-const DEFAULT_CONFIG: &str = include_str!("../config.toml");
+const DEFAULT_DEBUG_CONFIG: &str = include_str!("../config_debug.toml");
+const DEFAULT_RELEASE_CONFIG: &str = include_str!("../config_release.toml");
 
 /// Loads the config, creating a default config if needed.
-pub fn load(path: &str) -> anyhow::Result<ConfigContainer> {
-    let path = Path::new(path);
-    let default_config = DEFAULT_CONFIG;
+pub fn load(path: &Path) -> anyhow::Result<ConfigContainer> {
+    #[allow(unused_assignments)] // a bit hacky but works
+    let mut default_config = "";
+    if cfg!(debug_assertions) {
+        default_config = DEFAULT_DEBUG_CONFIG;
+    } else {
+        default_config = DEFAULT_RELEASE_CONFIG;
+    }
     let mut is_created = false;
 
     if !path.exists() {
-        log::info!("Creating default config");
         fs::write(path, default_config)?;
         is_created = true;
     }
 
     let config_string = fs::read_to_string(path)?;
-    let config: Config = toml::from_str(&config_string).context("invalid config.toml file")?;
+    let config: Config = toml::from_str(&config_string).context("Invalid config.toml file")?;
 
     Ok(ConfigContainer {
         config,
@@ -137,6 +142,7 @@ mod tests {
 
     #[test]
     fn default_config_is_valid() {
-        let _config: Config = toml::from_str(DEFAULT_CONFIG).unwrap();
+        let _config_debug: Config = toml::from_str(DEFAULT_DEBUG_CONFIG).unwrap();
+        let _config_release: Config = toml::from_str(DEFAULT_RELEASE_CONFIG).unwrap();
     }
 }

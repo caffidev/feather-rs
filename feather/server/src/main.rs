@@ -1,4 +1,4 @@
-use std::{cell::RefCell, rc::Rc, sync::Arc};
+use std::{cell::RefCell, path::Path, rc::Rc, sync::Arc, env};
 
 use anyhow::Context;
 use base::anvil::level::SuperflatGeneratorOptions;
@@ -15,13 +15,14 @@ const CONFIG_PATH: &str = "config.toml";
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
+    let path = Path::new(CONFIG_PATH);
     let feather_server::config::ConfigContainer {
         config,
         was_config_created,
-    } = feather_server::config::load(CONFIG_PATH).context("failed to load configuration file")?;
+    } = feather_server::config::load(path).context("Failed to load configuration file")?;
     logging::init(config.log.level);
     if was_config_created {
-        log::info!("Created default config");
+        log::info!("Created default config to {}", env::current_dir()?.join(path).to_str().unwrap());
     }
     log::info!("Loaded config");
 
