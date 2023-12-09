@@ -43,7 +43,7 @@ These results _will_ change after more features are implemented in Feather, so t
 Memory usage in Feather is proportional to the number of loaded chunks, not player counts. In the 500 player test, the server uses ~40 MiB of RAM
 until the players start to spread out. In the 1,000,000 entities test, it uses 400 MiB of RAM without any chunks loaded.
 
-### Running
+### Running - right now excluded
 We offer precompiled binaries for Windows, Linux, and macOS at [GitHub Actions](https://github.com/feather-rs/feather/actions/workflows/main.yml).
 NB: Do **NOT** use github releases, they are majorly outdated
 
@@ -69,6 +69,7 @@ git clone https://github.com/feather-rs/feather
 cd feather
 cargo build --release
 ```
+If you're going to production, don't forget to change some settings in config.toml!
 
 Compiling from source requires the latest stable version of Rust. Older Rust versions may be able
 to compile Feather, but they are not guaranteed to keep working.
@@ -83,7 +84,7 @@ For contributors, we have a work-in-progress explanation of Feather's architectu
 
 * Is Feather production ready?
 
-Not yet. There are numerous bugs and missing features which have yet to be resolved,
+No. There are numerous bugs and missing features which have yet to be resolved,
 and the codebase has not been tested enough to consider the server production ready.
 
 * How can I contribute?
