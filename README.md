@@ -25,9 +25,12 @@ own implementation (I think small competition is good,
 although I obviously not gonna make it this far as valence? but hey why not?).
 
 Also I wanted to ship dedicated executables, and vanilla game mechanics with it, and didnt want to drag bevy-ecs and bevy-app with it!
+
+I don't know whether I will make it distributable via crates.io,
+I think I am not, it will just be separated .toml/plugin-systems/main_server/server/crate-systems/utils app
 ### Supported Minecraft versions
 
-Feather supports 1.16.5 clients and world saves. We do not currently have plans to support multiple versions at once, but
+Feather supports 1.16.5 clients and world saves. We do not currently have plans to support multiple versions at once (I have), but
 we may consider this in the future.
 
 ### Goals
