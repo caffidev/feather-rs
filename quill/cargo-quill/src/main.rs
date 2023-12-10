@@ -1,7 +1,7 @@
 use anyhow::{bail, Context};
 use argh::FromArgs;
 use cargo_metadata::Metadata;
-use heck::CamelCase;
+use heck::ToLowerCamelCase;
 use quill_plugin_format::{PluginFile, PluginMetadata, PluginTarget, Triple};
 use std::{
     fs,
@@ -172,7 +172,7 @@ fn find_metadata(cargo_meta: &Metadata, args: &Build) -> anyhow::Result<PluginMe
     };
 
     let plugin_meta = PluginMetadata {
-        name: package.name.to_camel_case(),
+        name: package.name.to_lower_camel_case(),
         identifier: package.name.clone(),
         version: package.version.to_string(),
         api_version: quill_dependency.req.to_string(),

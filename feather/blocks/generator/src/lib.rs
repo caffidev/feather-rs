@@ -1,6 +1,6 @@
 use crate::load::ident;
-use heck::CamelCase;
-use heck::SnakeCase;
+use heck::ToLowerCamelCase;
+use heck::ToSnakeCase;
 use proc_macro2::{Ident, TokenStream};
 use quote::quote;
 use quote::ToTokens;
@@ -136,7 +136,7 @@ impl Property {
                 quote! { #value }
             }
             PropertyKind::Enum { name, .. } => {
-                let variant = ident(value.to_camel_case());
+                let variant = ident(value.to_lower_camel_case());
                 quote! { #name::#variant }
             }
         }

@@ -3,7 +3,7 @@
 
 use crate::{Block, Blocks, Property, PropertyKind};
 use anyhow::Context;
-use heck::CamelCase;
+use heck::ToLowerCamelCase;
 use indexmap::map::IndexMap;
 use once_cell::sync::Lazy;
 use proc_macro2::{Ident, Span};
@@ -146,8 +146,8 @@ impl PropertyStore {
         Property {
             name: ident(name),
             real_name: real_name.to_owned(),
-            _name_camel_case: ident(name.to_camel_case()),
-            kind: guess_property_kind(&possible_values, &name.to_camel_case()),
+            _name_camel_case: ident(name.to_lower_camel_case()),
+            kind: guess_property_kind(&possible_values, &name.to_lower_camel_case()),
             possible_values,
         }
     }
@@ -235,7 +235,7 @@ fn fix_property_names(report: &mut BlocksReport) -> PropertyStore {
 fn load_block(identifier: &str, block: &BlockDefinition) -> anyhow::Result<Option<Block>> {
     let identifier = strip_prefix(identifier)?;
 
-    let name_camel_case = identifier.to_camel_case();
+    let name_camel_case = identifier.to_lower_camel_case();
 
     let properties = load_block_properties(block);
 
@@ -330,7 +330,7 @@ fn guess_property_kind(possible_values: &[String], property_struct_name: &str) -
         let name = ident(property_struct_name);
         let variants: Vec<_> = possible_values
             .iter()
-            .map(|variant| variant.to_camel_case())
+            .map(|variant| variant.to_lower_camel_case())
             .map(ident)
             .collect();
         PropertyKind::Enum { name, variants }
