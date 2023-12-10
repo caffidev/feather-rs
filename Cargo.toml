@@ -42,7 +42,7 @@ members = [
     "feather/plugin-host/macros",
     "feather/plugin-host",
     "feather/server",
-
+    "feather/crafting",
     # Other
     "proxy",
 ]

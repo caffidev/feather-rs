@@ -3934,6 +3934,13 @@ impl Item {
         }
     }
 
+    /// Returns the `identifier` property of this `Item`.
+    pub fn identifier(&self) -> String {
+        let mut minecraft = "minecraft:".to_owned();
+        let name: &'static str = self.name();
+        minecraft.push_str(name);
+        return minecraft;
+    }
     /// Gets a `Item` by its `name`.
     pub fn from_name(name: &str) -> Option<Self> {
         match name {
@@ -4915,6 +4922,11 @@ impl Item {
             "respawn_anchor" => Some(Item::RespawnAnchor),
             _ => None,
         }
+    }
+    /// Gets a `Item` by its `identifier`.
+    pub fn from_identifier(identifier: &str) -> Option<Self> {
+        // TODO: add non-minecraft support
+        return Item::from_name(&identifier.replace("minecraft:", ""))
     }
 }
 #[allow(warnings)]
