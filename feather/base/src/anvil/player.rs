@@ -73,14 +73,14 @@ impl InventorySlot {
     /// Converts an [`ItemStack`] and network protocol index into an [`InventorySlot`].
     #[allow(clippy::manual_range_contains)]
     pub fn from_network_index(index: usize, stack: &ItemStack) -> Option<Self> {
-        let slot = if SLOT_HOTBAR_OFFSET <= index && index < SLOT_HOTBAR_OFFSET + HOTBAR_SIZE {
+        let slot = if (SLOT_HOTBAR_OFFSET..SLOT_HOTBAR_OFFSET+HOTBAR_SIZE).contains(&index) {
             // Hotbar
             (index - SLOT_HOTBAR_OFFSET) as i8
         } else if index == SLOT_OFFHAND {
             -106
-        } else if SLOT_ARMOR_MIN <= index && index <= SLOT_ARMOR_MAX {
+        } else if (SLOT_ARMOR_MIN..SLOT_ARMOR_MAX).contains(&index) {
             ((SLOT_ARMOR_MAX - index) + 100) as i8
-        } else if SLOT_INVENTORY_OFFSET <= index && index < SLOT_INVENTORY_OFFSET + INVENTORY_SIZE {
+        } else if (SLOT_INVENTORY_OFFSET..SLOT_INVENTORY_OFFSET + INVENTORY_SIZE).contains(&index) {
             index as i8
         } else {
             return None;
