@@ -1,5 +1,5 @@
 # Feather-rs <img height="45" src="https://user-images.githubusercontent.com/31416064/110449802-7a5b2c80-80ba-11eb-86f4-96d790fc1dc4.png" width="45"/>
-[!(https://sloc.xyz/github/project-jedi/jcl)]
+[![LOC](https://sloc.xyz/github/caffidev/feather-rs)]
 [![build](https://github.com/feather-rs/feather/workflows/build/badge.svg)](https://github.com/feather-rs/feather/actions)
 [![Discord](https://img.shields.io/discord/619316022800809995?logo=discord)](https://discordapp.com/invite/4eYmK69)
 
