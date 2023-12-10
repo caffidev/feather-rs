@@ -1,4 +1,4 @@
-name: Check & Test & Lints & Build
+name: Make Badges
 
 on:
   push:
