@@ -981,6 +981,27 @@ impl Text {
     pub fn nbt<A: Into<nbt::Blob>>(nbt: A) -> Text {
         Text::from(TextValue::nbt(nbt))
     }
+
+    pub fn as_ansi(&self) -> String {
+        let mut ansi = String::new();
+
+        let component = self.clone().into_component();
+        let mut to_serialize: Vec<TextValue> = Vec::new();
+
+        to_serialize.push(component.value);
+
+        if component.extra.is_some() {
+            for extra in component.extra.unwrap() {
+                to_serialize.push(extra.into_component().value);
+            }
+        }
+
+        for value in to_serialize {
+            ansi.push_str(&value.as_ansi());
+        }
+
+        ansi
+    }
 }
 
 impl From<Text> for String {
