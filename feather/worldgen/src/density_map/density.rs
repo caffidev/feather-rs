@@ -8,7 +8,6 @@ use base::{Biome, ChunkPosition};
 use bitvec::order::LocalBits;
 use bitvec::vec::BitVec;
 use const_soft_float::soft_f32::SoftF32;
-use once_cell::sync::Lazy;
 use simdnoise::NoiseBuilder;
 
 /// A density map generator using 3D Perlin noise.
