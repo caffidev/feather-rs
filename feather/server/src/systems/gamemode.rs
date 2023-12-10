@@ -17,6 +17,7 @@ pub fn register(systems: &mut SystemExecutor<Game>) {
     systems.group::<Server>().add_system(gamemode_change);
 }
 
+#[allow(unused_mut)]
 fn gamemode_change(game: &mut Game, server: &mut Server) -> SysResult {
     let mut may_fly_changes = Vec::new();
     let mut fly_changes = Vec::new();

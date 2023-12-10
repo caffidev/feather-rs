@@ -1,5 +1,5 @@
 use libcraft_items::InventorySlot;
-use libcraft_text::{IntoTextComponent, TextComponent, TextComponentBuilder};
+use libcraft_text::{IntoTextComponent, TextComponentBuilder};
 use log::debug;
 
 use base::anvil::player::PlayerAbilities;

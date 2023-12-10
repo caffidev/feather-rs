@@ -71,6 +71,7 @@ impl Config {
             view_distance: self.server.view_distance,
             max_players: self.server.max_players,
             default_gamemode: self.server.default_gamemode,
+            enforce_gamemode: self.server.enforce_gamemode,
             proxy_mode: match self.proxy.proxy_mode {
                 ProxyMode::None => None,
                 ProxyMode::Bungee => Some(crate::options::ProxyMode::Bungeecord),
@@ -94,6 +95,7 @@ pub struct ServerConfig {
     pub motd: String,
     pub max_players: u32,
     pub default_gamemode: Gamemode,
+    pub enforce_gamemode: bool,
     pub view_distance: u32,
 }
 

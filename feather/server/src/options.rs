@@ -12,6 +12,7 @@ pub struct Options {
 
     /// The server favicon.
     pub favicon: Option<Favicon>,
+    
     /// The server MOTD.
     pub motd: String,
 
@@ -27,6 +28,11 @@ pub struct Options {
 
     /// The default gamemode for new players.
     pub default_gamemode: Gamemode,
+
+    /// force-gamemode=true forces the server to send to the client gamemode values
+    /// other than the gamemode value saved by the server during world creation
+    /// if those values are set in server.properties after world creation.
+    pub enforce_gamemode: bool,
 
     /// Proxy IP forwarding mode
     pub proxy_mode: Option<ProxyMode>,
