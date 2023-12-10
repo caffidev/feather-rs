@@ -355,7 +355,7 @@ dependencies = [
  "anyhow",
  "argh",
  "cargo_metadata",
- "heck 0.3.3",
+ "heck 0.4.1",
  "quill-plugin-format",
 ]
 
@@ -443,7 +443,7 @@ version = "3.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "517358c28fcef6607bf6f76108e02afad7e82297d132a6b846dcc1fc3efcd153"
 dependencies = [
- "heck 0.4.0",
+ "heck 0.4.1",
  "proc-macro-error",
  "proc-macro2",
  "quote",
@@ -852,7 +852,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "bincode",
- "heck 0.3.3",
+ "heck 0.4.1",
  "indexmap",
  "maplit",
  "once_cell",
@@ -1259,9 +1259,9 @@ dependencies = [
 
 [[package]]
 name = "heck"
-version = "0.4.0"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2540771e65fc8cb83cd6e8a237f70c319bd5c29f78ed1084ba5d50eeac86f7f9"
+checksum = "95505c38b4572b2d910cecb0281560f54b440a19336cbbcb27bf6ce6adc6f5a8"
 
 [[package]]
 name = "hecs"
