@@ -299,6 +299,7 @@ impl From<&Keybind> for String {
 pub enum Translate {
     ChatTypeText,
     MultiplayerPlayerJoined,
+    MultiplayerPlayerLeft,
     Custom(Cow<'static, str>),
 }
 
@@ -307,6 +308,7 @@ impl Translate {
         match self {
             Translate::ChatTypeText => format!("<{}{}> {}", args[0].as_ansi(), style, args[1].as_ansi()),
             Translate::MultiplayerPlayerJoined => format!("{}{} joined the game", args[0].as_ansi(), style),
+            Translate::MultiplayerPlayerLeft => format!("{}{} left the game", args[0].as_ansi(), style),
             Translate::Custom(name) => {
                 let mut args_strings: String = String::new();
 
