@@ -6,6 +6,7 @@ edition = "2018"
 
 [dependencies]
 base = { path = "../base", package = "feather-base" }
+const_soft_float = "0.1.3"
 bitvec = "0.21"
 log = "0.4"
 num-traits = "0.2"
