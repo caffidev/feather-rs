@@ -4,6 +4,7 @@ use anyhow::Context;
 use base::anvil::level::SuperflatGeneratorOptions;
 use common::{Game, TickLoop, World};
 use ecs::SystemExecutor;
+use utils::enable_ansi_support;
 use feather_server::{config::Config, Server};
 use plugin_host::PluginManager;
 use worldgen::{ComposableGenerator, SuperflatWorldGenerator, VoidWorldGenerator, WorldGenerator};
@@ -21,6 +22,16 @@ async fn main() -> anyhow::Result<()> {
         was_config_created,
     } = feather_server::config::load(path).context("Failed to load configuration file")?;
     logging::init(config.log.level);
+
+    match enable_ansi_support() {
+        Ok(_) => {
+            log::trace!("If Windows, ANSI was enabled")
+        },
+        Err(_) => {
+            log::warn!("Could not enable ANSI code support on your OS");
+        }
+    }
+
     if was_config_created {
         log::info!("Created default config to {}", env::current_dir()?.join(path).to_str().unwrap());
     }

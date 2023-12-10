@@ -22,6 +22,7 @@ colored = "2"
 common = { path = "../common", package = "feather-common" }
 crossbeam-utils = "0.8"
 ecs = { path = "../ecs", package = "feather-ecs" }
+utils = { path = "../utils", package = "feather-utils"}
 fern = "0.6"
 flate2 = "1"
 flume = "0.10"
@@ -50,11 +51,11 @@ sha-1 = "0.9"
 tokio = { version = "1", features = [ "full" ] }
 toml = "0.5"
 ureq = { version = "2", features = [ "json" ] }
-utils = { path = "../utils", package = "feather-utils" }
 uuid = "0.8"
 slab = "0.4"
 libcraft-core = { path = "../../libcraft/core" }
 libcraft-items = { path = "../../libcraft/items" }
+libcraft-text = { path = "../../libcraft/text"}
 worldgen = { path = "../worldgen", package = "feather-worldgen" }
 
 [features]

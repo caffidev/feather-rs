@@ -4,6 +4,14 @@ version = "0.1.0"
 authors = [ "caelunshun <caelunshun@gmail.com>" ]
 edition = "2018"
 
+[target.'cfg(windows)'.dependencies]
+windows-sys = {version = "0.52.0", features = [
+    "Win32_Foundation",
+    "Win32_Storage_FileSystem",
+    "Win32_Security",
+    "Win32_System_Console",
+]}
+
 [dependencies]
 
 [dev-dependencies]
