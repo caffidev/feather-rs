@@ -385,6 +385,17 @@ where
 }
 
 impl TextValue {
+    pub fn name_of(&self) -> &'static str {
+        match self {
+            TextValue::Text { .. } => "text",
+            TextValue::Translate { .. } => "translate",
+            TextValue::Score { .. } => "score",
+            TextValue::Selector { .. } => "selector",
+            TextValue::Keybind { .. } => "keybind",
+            TextValue::Nbt { .. } => "nbt",
+        }
+    }
+
     pub fn text<T: Into<Cow<'static, str>>>(text: T) -> Self {
         TextValue::Text { text: text.into() }
     }
@@ -436,6 +447,10 @@ impl TextValue {
 
     pub fn nbt<A: Into<nbt::Blob>>(nbt: A) -> Self {
         TextValue::Nbt { nbt: nbt.into() }
+    }
+    
+    pub(crate) fn as_ansi(&self) -> String {
+        format!("<Component:{}>", self.name_of()) //TODO: proper realization
     }
 }
 
