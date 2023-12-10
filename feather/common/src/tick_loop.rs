@@ -32,7 +32,8 @@ impl TickLoop {
             if elapsed > TICK_DURATION {
                 let bt = Backtrace::force_capture();
 
-                log::warn!("Tick took too long ({:?}), backtrace: {:?}", elapsed,bt);
+                log::warn!("Tick took too long ({:?})", elapsed);
+                log::trace!("backtrace: {:?}", bt);
             } else {
                 std::thread::sleep(TICK_DURATION - elapsed);
             }
