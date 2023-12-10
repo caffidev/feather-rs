@@ -1,4 +1,4 @@
-use std::time::{Instant};
+use std::time::Instant;
 use std::backtrace::Backtrace;
 
 use base::TICK_DURATION;
