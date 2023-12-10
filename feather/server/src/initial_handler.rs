@@ -197,7 +197,7 @@ fn offline_mode_uuid(username: &str) -> Uuid {
         .set_variant(uuid::Variant::RFC4122)
         .set_version(uuid::Version::Md5);
 
-    builder.build()
+    builder.into_uuid()
 }
 
 const RSA_BITS: usize = 1024;

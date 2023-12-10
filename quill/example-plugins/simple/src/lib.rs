@@ -29,7 +29,7 @@ fn test_system(plugin: &mut SimplePlugin, game: &mut Game) {
             name,
             gamemode,
             position,
-            uuid.to_hyphenated()
+            uuid.as_hyphenated()
         ));
 
         if plugin.tick_counter % 100 == 0 {
