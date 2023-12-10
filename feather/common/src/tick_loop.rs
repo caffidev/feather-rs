@@ -1,4 +1,5 @@
-use std::time::Instant;
+use std::time::{Instant, Duration};
+use std::backtrace::Backtrace;
 
 use base::TICK_DURATION;
 
@@ -29,7 +30,9 @@ impl TickLoop {
 
             let elapsed = start.elapsed();
             if elapsed > TICK_DURATION {
-                log::warn!("Tick took too long ({:?})", elapsed);
+                let bt = Backtrace::force_capture();
+
+                log::warn!("Tick took too long ({:?}), backtrace: {:?}", elapsed,bt);
             } else {
                 std::thread::sleep(TICK_DURATION - elapsed);
             }
