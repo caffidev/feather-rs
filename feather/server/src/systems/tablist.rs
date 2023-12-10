@@ -7,7 +7,7 @@ use common::Game;
 use ecs::{SysResult, SystemExecutor};
 use quill_common::events::{EntityRemoveEvent, GamemodeEvent, PlayerJoinEvent};
 use quill_common::{components::Name, entities::Player};
-
+use common::events::TablistExtrasUpdateEvent;
 use crate::{ClientId, Server};
 
 pub fn register(systems: &mut SystemExecutor<Game>) {
@@ -15,7 +15,8 @@ pub fn register(systems: &mut SystemExecutor<Game>) {
         .group::<Server>()
         .add_system(remove_tablist_players)
         .add_system(add_tablist_players)
-        .add_system(change_tablist_player_gamemode);
+        .add_system(change_tablist_player_gamemode)
+        .add_system(update_tablist_header_footer);
 }
 
 fn remove_tablist_players(game: &mut Game, server: &mut Server) -> SysResult {
@@ -67,6 +68,23 @@ fn change_tablist_player_gamemode(game: &mut Game, server: &mut Server) -> SysRe
     for (_, (event, &uuid)) in game.ecs.query::<(&GamemodeEvent, &Uuid)>().iter() {
         // Change this player's gamemode in players' tablists
         server.broadcast_with(|client| client.change_player_tablist_gamemode(uuid, **event));
+    }
+    Ok(())
+}
+
+fn update_tablist_header_footer(game:  &mut Game, server: &mut Server) -> SysResult {
+    game.ecs.insert_event(TablistExtrasUpdateEvent {
+        header: Some("{\"text\":\"Header\"}".to_string()),
+        footer: Some("{\"text\":\"Header\"}".to_string())
+    });
+
+    let default = "{\"text\":\"\"}";
+    for (_,event) in game
+        .ecs
+        .query::<&TablistExtrasUpdateEvent>()
+        .iter() 
+    {
+        server.broadcast_with(|client| client.send_tablist_header_footer(event.header.as_deref().unwrap_or(default), event.footer.as_deref().unwrap_or(default)))    
     }
     Ok(())
 }

@@ -58,3 +58,9 @@ pub struct ChunkLoadEvent {
 pub struct ChunkLoadFailEvent {
     pub position: ChunkPosition,
 }
+
+#[derive(Debug)]
+pub struct TablistExtrasUpdateEvent {
+    pub header: Option<String>,
+    pub footer: Option<String>,
+}
