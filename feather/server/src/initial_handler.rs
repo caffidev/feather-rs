@@ -63,13 +63,11 @@ pub async fn handle(worker: &mut Worker) -> anyhow::Result<InitialHandling> {
     match handshake.next_state {
         HandshakeState::Status => handle_status(worker).await,
         HandshakeState::Login => {
-            if handshake.protocol_version < PROTOCOL_VERSION {
+            if handshake.protocol_version != PROTOCOL_VERSION {
                 worker
                     .write(ServerLoginPacket::DisconnectLogin(DisconnectLogin {
                         reason: Text::from(
-                            "Invalid protocol! The server is running on version 1.16!",
-                        )
-                        .to_string(),
+                            format!("Invalid protocol! The server is running on version {}", SERVER_NAME)).to_string(),
                     }))
                     .await
                     .ok();
