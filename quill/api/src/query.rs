@@ -215,7 +215,7 @@ where
     type Item = (Entity, Q::Target);
 
     fn next(&mut self) -> Option<Self::Item> {
-        if self.entity_index >= self.data.num_entities as usize {
+        if self.entity_index >= self.data.entity_count as usize {
             return None;
         }
 

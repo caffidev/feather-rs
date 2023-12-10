@@ -763,18 +763,18 @@ impl Readable for PlayerInfo {
         Self: Sized,
     {
         let action = VarInt::read(buffer, version)?.0;
-        let num_players = VarInt::read(buffer, version)?.0;
+        let player_count = VarInt::read(buffer, version)?.0;
 
         match action {
             0 => {
                 let mut vec = Vec::new();
-                for _ in 0..num_players {
+                for _ in 0..player_count {
                     let uuid = Uuid::read(buffer, version)?;
                     let name = String::read(buffer, version)?;
 
-                    let num_properties = VarInt::read(buffer, version)?;
+                    let property_count = VarInt::read(buffer, version)?;
                     let mut properties = Vec::new();
-                    for _ in 0..num_properties.0 {
+                    for _ in 0..property_count.0 {
                         let name = String::read(buffer, version)?;
                         let value = String::read(buffer, version)?;
                         let signature = if bool::read(buffer, version)? {
@@ -809,7 +809,7 @@ impl Readable for PlayerInfo {
             }
             1 => {
                 let mut vec = Vec::new();
-                for _ in 0..num_players {
+                for _ in 0..player_count {
                     let uuid = Uuid::read(buffer, version)?;
                     let gamemode = Gamemode::read(buffer, version)?;
                     vec.push((uuid, gamemode));
@@ -818,7 +818,7 @@ impl Readable for PlayerInfo {
             }
             2 => {
                 let mut vec = Vec::new();
-                for _ in 0..num_players {
+                for _ in 0..player_count {
                     let uuid = Uuid::read(buffer, version)?;
                     let ping = VarInt::read(buffer, version)?.0;
                     vec.push((uuid, ping));
@@ -827,7 +827,7 @@ impl Readable for PlayerInfo {
             }
             3 => {
                 let mut vec = Vec::new();
-                for _ in 0..num_players {
+                for _ in 0..player_count {
                     let uuid = Uuid::read(buffer, version)?;
                     let display_name = if bool::read(buffer, version)? {
                         Some(String::read(buffer, version)?)
@@ -840,7 +840,7 @@ impl Readable for PlayerInfo {
             }
             4 => {
                 let mut vec = Vec::new();
-                for _ in 0..num_players {
+                for _ in 0..player_count {
                     let uuid = Uuid::read(buffer, version)?;
                     vec.push(uuid);
                 }
@@ -853,7 +853,7 @@ impl Readable for PlayerInfo {
 
 impl Writeable for PlayerInfo {
     fn write(&self, buffer: &mut Vec<u8>, version: crate::ProtocolVersion) -> anyhow::Result<()> {
-        let (action_id, num_players) = match self {
+        let (action_id, player_count) = match self {
             PlayerInfo::AddPlayers(vec) => (0, vec.len()),
             PlayerInfo::UpdateGamemodes(vec) => (1, vec.len()),
             PlayerInfo::UpdatePings(vec) => (2, vec.len()),
@@ -861,7 +861,7 @@ impl Writeable for PlayerInfo {
             PlayerInfo::RemovePlayers(vec) => (4, vec.len()),
         };
         VarInt(action_id).write(buffer, version)?;
-        VarInt(num_players as i32).write(buffer, version)?;
+        VarInt(player_count as i32).write(buffer, version)?;
 
         match self {
             PlayerInfo::AddPlayers(vec) => {

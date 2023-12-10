@@ -1336,13 +1336,13 @@ pub struct Statistics {
 
 impl Packet for Statistics {
     fn read_from(&mut self, buf: &mut Cursor<&[u8]>) -> anyhow::Result<()> {
-        let num_statistics = buf.try_get_var_int()?;
+        let statistic_count = buf.try_get_var_int()?;
 
-        if num_statistics > 255 {
+        if statistic_count > 255 {
             return Err(Error::InsufficientArrayLength.into());
         }
 
-        for _ in 0..num_statistics {
+        for _ in 0..statistic_count {
             self.statistics
                 .push((buf.try_get_var_int()?, buf.try_get_var_int()?));
         }
@@ -1613,9 +1613,9 @@ pub struct WindowItems {
 impl Packet for WindowItems {
     fn read_from(&mut self, buf: &mut Cursor<&[u8]>) -> anyhow::Result<()> {
         self.window_id = buf.try_get_u8()?;
-        let num_slots = buf.try_get_i16()?;
+        let slot_count = buf.try_get_i16()?;
 
-        for _ in 0..num_slots {
+        for _ in 0..num_count {
             self.slots.push(buf.try_get_slot()?);
         }
 
@@ -2131,10 +2131,10 @@ impl Packet for PlayerInfo {
         self.action = match id {
             0 => {
                 let name = buf.try_get_string()?;
-                let num_props = buf.try_get_var_int()?;
+                let prop_count = buf.try_get_var_int()?;
 
                 let mut props = vec![];
-                for _ in 0..num_props {
+                for _ in 0..prop_count {
                     let s0 = buf.try_get_string()?;
                     let s1 = buf.try_get_string()?;
                     let s2 = if buf.try_get_bool()? {

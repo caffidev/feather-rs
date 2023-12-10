@@ -53,8 +53,8 @@ impl BlockChangeEvent {
 
     /// Returns an iterator over chunk section positions affected by this block change.
     ///
-    /// The yielded tuple consists of `(chunk, section_y, num_changed_blocks)`,
-    /// where `num_changed_blocks` is the number of blocks changed within that chunk.
+    /// The yielded tuple consists of `(chunk, section_y, changed_block_count)`,
+    /// where `changed_block_count` is the number of blocks changed within that chunk.
     pub fn iter_affected_chunk_sections(
         &self,
     ) -> impl Iterator<Item = (ChunkPosition, usize, usize)> + '_ {

@@ -14,12 +14,12 @@ pub struct EntityId(pub u64);
 pub struct QueryData {
     /// The number of (entity, component_1, ..., component_n) pairs
     /// yielded by this query.
-    pub num_entities: u64,
-    /// Pointer to an array of `num_entities` entities.
+    pub entity_count: u64,
+    /// Pointer to an array of `entity_count` entities.
     pub entities_ptr: PointerMut<EntityId>,
     /// Pointer to an array of component pointers, one for
     /// each component in the call to `query_begin`. Each component
-    /// pointer points to `num_entities` components of the corresponding type,
+    /// pointer points to `entity_count` components of the corresponding type,
     /// serialized using the component's `to_bytes` method.
     ///
     /// Note that each component pointer is 64 bits regardless of target.

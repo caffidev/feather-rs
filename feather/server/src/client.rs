@@ -174,8 +174,8 @@ impl Client {
     }
 
     pub fn tick(&self) {
-        let num_to_send = MAX_CHUNKS_PER_TICK.min(self.chunk_send_queue.borrow().len());
-        for packet in self.chunk_send_queue.borrow_mut().drain(0..num_to_send) {
+        let send_count = MAX_CHUNKS_PER_TICK.min(self.chunk_send_queue.borrow().len());
+        for packet in self.chunk_send_queue.borrow_mut().drain(0..send_count) {
             log::trace!(
                 "Sending chunk at {:?} to {}",
                 packet.chunk.read().position(),

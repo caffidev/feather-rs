@@ -378,8 +378,8 @@ fn opened_chests(game: &Game, pos: BlockPosition) -> ArrayVec<[Option<Entity>; 2
 
 /// Creates slot vector for the Window Items packet.
 fn slots(world: &World, chests: &[Option<Entity>]) -> Vec<Option<ItemStack>> {
-    let num_slots = SLOTS * chests.len();
-    let mut slots = Vec::with_capacity(num_slots);
+    let slot_count = SLOTS * chests.len();
+    let mut slots = Vec::with_capacity(slot_count);
 
     for chest in chests.iter().copied().filter_map(|entity| entity) {
         let inventory = world.get::<Inventory>(chest);
@@ -395,15 +395,15 @@ fn slots(world: &World, chests: &[Option<Entity>]) -> Vec<Option<ItemStack>> {
     slots
 }
 
-fn send_open_window(world: &World, player: Entity, num_slots: usize, window_id: u8) {
+fn send_open_window(world: &World, player: Entity, slot_count: usize, window_id: u8) {
     const SINGLE: usize = SLOTS;
     const LARGE: usize = SLOTS * 2;
-    let window_type = match num_slots {
+    let window_type = match slot_count {
         SINGLE => "minecraft:generic_9x3",
         LARGE => "minecraft:generic_9x6",
         _ => "minecraft:generic_9x1",
     };
-    let window_title = match num_slots {
+    let window_title = match slot_count {
         SINGLE => "Chest",
         LARGE => "Large Chest",
         _ => "Chest",
@@ -412,7 +412,7 @@ fn send_open_window(world: &World, player: Entity, num_slots: usize, window_id: 
         window_id,
         window_type: String::from(window_type),
         window_title: TextRoot::from(window_title).into(),
-        number_of_slots: num_slots as u8,
+        number_of_slots: slot_count as u8,
         entity_id: None,
     };
     world.get::<Network>(player).send(packet);

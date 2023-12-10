@@ -46,7 +46,7 @@ struct WrittenComponentData {
 struct WriteComponentsVisitor<'a> {
     query: &'a DynamicQuery<'a>,
     cx: &'a PluginContext,
-    num_entities: usize,
+    entity_count: usize,
 }
 
 impl<'a> ComponentVisitor<anyhow::Result<WrittenComponentData>> for WriteComponentsVisitor<'a> {
@@ -59,7 +59,7 @@ impl<'a> ComponentVisitor<anyhow::Result<WrittenComponentData>> for WriteCompone
         let (buffer, len) = match T::SERIALIZATION_METHOD {
             SerializationMethod::Bytemuck => {
                 // Allocate enough memory to hold all the components.
-                let layout = Layout::array::<T>(self.num_entities)?;
+                let layout = Layout::array::<T>(self.entity_count)?;
                 let buffer = self.cx.bump_allocate(layout)?;
 
                 if size_of::<T>() != 0 {
@@ -78,12 +78,12 @@ impl<'a> ComponentVisitor<anyhow::Result<WrittenComponentData>> for WriteCompone
                     }
                 }
 
-                (buffer, self.num_entities * size_of::<T>())
+                (buffer, self.entity_count * size_of::<T>())
             }
             SerializationMethod::Bincode => {
                 // Memory will need to be allocated dynamically,
                 // but we can approximate a minimum capacity.
-                let mut bytes = Vec::with_capacity(self.num_entities * size_of::<T>());
+                let mut bytes = Vec::with_capacity(self.entity_count * size_of::<T>());
 
                 // Write components into the buffer.
                 for component_slice in components {
@@ -112,10 +112,10 @@ fn create_query_data(
     let query_types: Vec<TypeId> = types.iter().copied().map(HostComponent::type_id).collect();
     let query = ecs.query_dynamic(DynamicQueryTypes::new(&query_types, &[]));
 
-    let num_entities = query.iter_entities().count();
-    if num_entities == 0 {
+    let entity_count = query.iter_entities().count();
+    if entity_count == 0 {
         return Ok(QueryData {
-            num_entities: 0,
+            entity_count: 0,
             entities_ptr: PointerMut::new(ptr::null_mut()),
             component_ptrs: PointerMut::new(ptr::null_mut()),
             component_lens: PointerMut::new(ptr::null_mut()),
@@ -128,7 +128,7 @@ fn create_query_data(
         let data = typ.visit(WriteComponentsVisitor {
             query: &query,
             cx,
-            num_entities,
+            entity_count,
         })?;
 
         unsafe {
@@ -137,7 +137,7 @@ fn create_query_data(
         }
     }
 
-    let entities_ptr = cx.bump_allocate(Layout::array::<EntityId>(num_entities)?)?;
+    let entities_ptr = cx.bump_allocate(Layout::array::<EntityId>(entity_count)?)?;
     for (i, entity) in query.iter_entities().enumerate() {
         let bits = entity.to_bits();
         unsafe {
@@ -146,7 +146,7 @@ fn create_query_data(
     }
 
     Ok(QueryData {
-        num_entities: num_entities as u64,
+        entity_count: entity_count as u64,
         entities_ptr: PointerMut::new(entities_ptr.as_native().cast()),
         component_ptrs: PointerMut::new(component_ptrs.as_native().cast()),
         component_lens: PointerMut::new(component_lens.as_native().cast()),

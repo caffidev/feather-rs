@@ -84,14 +84,14 @@ mod tests {
 
         let count = PlayerCount::new(max_players);
 
-        let num_added = AtomicU32::new(0);
+        let added_count = AtomicU32::new(0);
 
         thread::scope(|s| {
             for _ in 0..threads {
                 s.spawn(|_| {
                     for _ in 0..players_per_thread {
                         if count.try_add_player().is_ok() {
-                            num_added.fetch_add(1, Ordering::SeqCst);
+                            added_count.fetch_add(1, Ordering::SeqCst);
                         }
                     }
                 });
@@ -99,7 +99,7 @@ mod tests {
         })
         .unwrap();
 
-        assert_eq!(num_added.load(Ordering::SeqCst), max_players);
+        assert_eq!(added_count.load(Ordering::SeqCst), max_players);
         assert_eq!(count.get(), max_players);
     }
 }

@@ -230,7 +230,7 @@ impl MapBuffer {
 /* TODO: audit this implementation.
 /// A packet buffer using an array of slots.
 pub struct ArrayBuffer {
-    /// Internal array of length `2 * (num_players rounded up to the next power of two)`.
+    /// Internal array of length `2 * (player_count rounded up to the next power of two)`.
     /// Packets received for a player with index `i` will
     /// be located at `array[i]` and `array[n + i]`, where `n` is the number
     /// of players rounded up to the next power of two.

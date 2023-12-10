@@ -42,7 +42,7 @@ impl ChunkLoadState {
 
         // If this was the last ticket, then queue the chunk to be
         // unloaded.
-        if self.chunk_tickets.num_tickets(chunk) == 0 {
+        if self.chunk_tickets.ticket_count(chunk) == 0 {
             self.chunk_tickets.remove_chunk(chunk);
             self.chunk_unload_queue
                 .push_back(QueuedChunkUnload::new(chunk));
@@ -87,7 +87,7 @@ impl ChunkTickets {
         vec_remove_item(self.by_entity.get_mut(&ticket).unwrap(), &chunk);
     }
 
-    pub fn num_tickets(&self, chunk: ChunkPosition) -> usize {
+    pub fn ticket_count(&self, chunk: ChunkPosition) -> usize {
         match self.tickets.get(&chunk) {
             Some(vec) => vec.len(),
             None => 0,
@@ -149,7 +149,7 @@ fn unload_chunks(game: &mut Game, state: &mut ChunkLoadState) -> SysResult {
         state.chunk_unload_queue.pop_front();
 
         // If the chunk has acquired new tickets, then abort unloading it.
-        if state.chunk_tickets.num_tickets(unload.pos) > 0 {
+        if state.chunk_tickets.ticket_count(unload.pos) > 0 {
             continue;
         }
 

@@ -36,7 +36,7 @@ pub const SECTION_WIDTH: usize = CHUNK_WIDTH;
 pub const SECTION_VOLUME: usize = (SECTION_HEIGHT * SECTION_WIDTH * SECTION_WIDTH) as usize;
 
 /// The number of chunk sections in a column.
-pub const NUM_SECTIONS: usize = 16;
+pub const SECTION_COUNT: usize = 16;
 
 mod biome_store;
 mod blocks;
@@ -57,7 +57,7 @@ pub use palette::Palette;
 /// Consists of 16 `ChunkSection`s.
 #[derive(Debug, Clone)]
 pub struct Chunk {
-    sections: [Option<ChunkSection>; NUM_SECTIONS + 2],
+    sections: [Option<ChunkSection>; SECTION_COUNT + 2],
 
     biomes: BiomeStore,
 

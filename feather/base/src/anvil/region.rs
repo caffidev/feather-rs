@@ -662,10 +662,10 @@ pub fn load_region(dir: &Path, pos: RegionPosition) -> Result<RegionHandle, Erro
 
     let header = read_header(&mut file)?;
 
-    let num_sectors =
+    let sector_count =
         (file.metadata().map_err(Error::Io)?.len() + SECTOR_BYTES as u64 - 1) / SECTOR_BYTES as u64;
 
-    let allocator = SectorAllocator::new(&header, num_sectors as u32);
+    let allocator = SectorAllocator::new(&header, sector_count as u32);
 
     Ok(RegionHandle {
         file,

@@ -40,7 +40,7 @@ impl BiomeGenerator for TwoLevelBiomeGenerator {
 
         let mut biomes = BiomeStore::default(); // Will be overridden
 
-        let num_groups = BIOME_GROUPS.len();
+        let group_count = BIOME_GROUPS.len();
 
         // TODO: distort voronoi
 
@@ -51,7 +51,7 @@ impl BiomeGenerator for TwoLevelBiomeGenerator {
                     let (closest_x, closest_z) =
                         group_voronoi.get(chunk.x * 16 + x * 4, chunk.z * 16 + z * 4);
 
-                    let group_index = voronoi::shuffle(closest_x, closest_z, 0, num_groups);
+                    let group_index = voronoi::shuffle(closest_x, closest_z, 0, group_count);
 
                     &BIOME_GROUPS[group_index]
                 };

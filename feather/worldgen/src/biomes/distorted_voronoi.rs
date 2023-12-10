@@ -98,18 +98,18 @@ mod tests {
 
         println!("{:?}", biomes);
 
-        let mut num_plains = 0;
+        let mut plain_count = 0;
         for x in 0..4 {
             for z in 0..4 {
                 for y in 0..64 {
                     if biomes.get(x, y, z) == Biome::Plains {
-                        num_plains += 1;
+                        plain_count += 1;
                     }
                 }
             }
         }
 
-        assert_ne!(num_plains, 4 * 64 * 4);
+        assert_ne!(plain_count, 4 * 64 * 4);
     }
 
     #[test]

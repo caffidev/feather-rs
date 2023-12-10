@@ -152,11 +152,11 @@ impl RegionWorker {
             self.region_files.retain(|_, file| !file.should_close());
             self.last_cache_update = Instant::now();
 
-            let num_closed = initial_len - self.region_files.len();
-            if num_closed != 0 {
+            let closed_count = initial_len - self.region_files.len();
+            if closed_count != 0 {
                 log::debug!(
                     "Closed {} region files ({} still open)",
-                    num_closed,
+                    closed_count,
                     self.region_files.len()
                 );
             }
