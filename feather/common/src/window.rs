@@ -9,7 +9,7 @@ pub use libcraft_inventory::Window as BackingWindow;
 use libcraft_inventory::WindowError;
 use libcraft_items::InventorySlot::{self, Empty};
 use parking_lot::MutexGuard;
-use parking_lot::RawMutex;
+
 /// A player's window. Wraps one or more inventories and handles
 /// conversion between protocol and slot indices.
 ///
