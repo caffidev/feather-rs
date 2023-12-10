@@ -363,6 +363,7 @@ where
         match value.as_ref() {
             "chat.type.text" => Translate::ChatTypeText,
             "multiplayer.player.joined" => Translate::MultiplayerPlayerJoined,
+            "multiplayer.player.left" => Translate::MultiplayerPlayerLeft,
             _ => Translate::Custom(value),
         }
     }
@@ -373,6 +374,7 @@ impl<'a> From<&Translate> for String {
         match translate {
             Translate::ChatTypeText => "chat.type.text",
             Translate::MultiplayerPlayerJoined => "multiplayer.player.joined",
+            Translate::MultiplayerPlayerLeft => "multiplayer.player.left",
             Translate::Custom(key) => key.as_ref(),
         }
         .into()
