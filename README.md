@@ -9,6 +9,22 @@ A Minecraft server implementation written in Rust.
 
 The project is in an **early stage**. Many, many features are unimplemented. We welcome help from anyone willing to contribute!
 
+The difference of this fork is that, you compile your own server with your own needed features via making your own crate! (Like valence)
+
+https://github.com/valence-rs/valence/
+
+### What is the difference between this and valence?
+Valence tries to make a rust framework, but this project tries to make a server, but customizable that way, that you can add/delete certain features from it (systems).
+
+You can look at it this way -
+  valence - game engine, that allows use to write your own server
+  feather - is a server, but supports plugins like valence
+
+This project could be a wrapper for valence, but I did want to make my
+own implementation (I think small competition is good,
+although I obviously not gonna make it this far as valence? but hey why not?).
+
+Also I wanted to ship dedicated executables, and vanilla game mechanics with it, and didnt want to drag bevy-ecs and bevy-app with it!
 ### Supported Minecraft versions
 
 Feather supports 1.16.5 clients and world saves. We do not currently have plans to support multiple versions at once, but
