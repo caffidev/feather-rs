@@ -4,7 +4,7 @@
 [![Discord](https://img.shields.io/discord/619316022800809995?logo=discord)](https://discordapp.com/invite/4eYmK69)
 
 A Minecraft server implementation written in Rust.
-
+Not in active development.
 ### Status
 
 The project is in an **early stage**. Many, many features are unimplemented. We welcome help from anyone willing to contribute!
