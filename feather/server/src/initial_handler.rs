@@ -21,7 +21,7 @@ use protocol::{
 use rand::rngs::OsRng;
 use rsa::{PaddingScheme, PublicKeyParts, RsaPrivateKey};
 use serde::{Deserialize, Serialize};
-use sha1::Sha1;
+use sha1_smol::Sha1;
 use std::convert::TryInto;
 use uuid::Uuid;
 
@@ -279,7 +279,8 @@ fn compute_server_hash(shared_secret: CryptKey) -> String {
     hasher.update(b""); // server ID - always empty
     hasher.update(&shared_secret);
     hasher.update(&*RSA_KEY_ENCODED);
-    hexdigest(hasher.finalize().as_slice())
+    // we can't just use Digest.to_string here, because minecraft uses its own implementation
+    hexdigest(hasher.digest().bytes().as_slice())
 }
 
 // Non-standard hex digest used by Minecraft.

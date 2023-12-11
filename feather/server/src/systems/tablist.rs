@@ -75,7 +75,7 @@ fn change_tablist_player_gamemode(game: &mut Game, server: &mut Server) -> SysRe
 fn update_tablist_header_footer(game:  &mut Game, server: &mut Server) -> SysResult {
     game.ecs.insert_event(TablistExtrasUpdateEvent {
         header: Some("{\"text\":\"Header\"}".to_string()),
-        footer: Some("{\"text\":\"Footer\"}".to_string())
+        footer: Some("{\"text\":\"Footer\"}t".to_string())
     });
 
     let default = "{\"text\":\"\"}";
