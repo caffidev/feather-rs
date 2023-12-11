@@ -33,7 +33,7 @@ pub const SECTION_HEIGHT: usize = 16;
 pub const SECTION_WIDTH: usize = CHUNK_WIDTH;
 
 /// The volume in blocks of a chunk section.
-pub const SECTION_VOLUME: usize = (SECTION_HEIGHT * SECTION_WIDTH * SECTION_WIDTH) as usize;
+pub const SECTION_VOLUME: usize = SECTION_HEIGHT * SECTION_WIDTH * SECTION_WIDTH;
 
 /// The number of chunk sections in a column.
 pub const SECTION_COUNT: usize = 16;
