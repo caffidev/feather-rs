@@ -62,7 +62,7 @@ impl ItemStack {
             count,
             meta: Some(ItemStackMeta {
                 title: String::from(item.name()),
-                lore: "".to_owned(),
+                lore: String::new(),
                 damage: None,
                 repair_cost: None,
                 enchantments: vec![],
@@ -374,7 +374,7 @@ impl Display for ItemStackError {
             ItemStackError::NotEnoughItems => "Not Enough Items",
         };
 
-        write!(f, "{}", name)
+        write!(f, "{name}")
     }
 }
 
@@ -385,7 +385,7 @@ impl ItemStackMeta {
     pub fn new(item: Item) -> Self {
         Self {
             title: item.display_name().to_owned(),
-            lore: "".to_owned(),
+            lore: String::new(),
             damage: None,
             repair_cost: None,
             enchantments: vec![],

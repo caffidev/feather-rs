@@ -28,10 +28,7 @@ pub struct Pointer<T> {
 
 impl<T> Clone for Pointer<T> {
     fn clone(&self) -> Self {
-        Self {
-            ptr: self.ptr,
-            _marker: self._marker,
-        }
+        *self
     }
 }
 
@@ -73,10 +70,7 @@ pub struct PointerMut<T> {
 
 impl<T> Clone for PointerMut<T> {
     fn clone(&self) -> Self {
-        Self {
-            ptr: self.ptr,
-            _marker: self._marker,
-        }
+        *self
     }
 }
 
