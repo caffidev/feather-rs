@@ -29,7 +29,7 @@ impl ChunkLock {
     /// Attempts to set the chunk as unloaded. Returns an error if the chunk is locked as writable.
     pub fn set_unloaded(&self) -> anyhow::Result<()> {
         if self.loaded.swap(false, Ordering::SeqCst) {
-            // FIXME: Decide what to do when unloading an unloaded chunk
+            bail!("Cannot unload chunk because it is already unloaded!")
         }
         if self.lock.try_read().is_none() {
             // Locking fails when someone else already owns a write lock
