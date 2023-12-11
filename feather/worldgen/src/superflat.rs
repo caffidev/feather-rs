@@ -23,7 +23,7 @@ impl WorldGenerator for SuperflatWorldGenerator {
                 continue;
             }
             // FIXME: get rid of this hack by having a consistent naming convention - Item::name() returns `stone` but BlockId::from_identifier requires `minecraft:stone`
-            let layer_block = BlockId::from_identifier(&format!("minecraft:{}", layer.block));
+            let layer_block = BlockId::from_identifier(layer.block);
             if let Some(layer_block) = layer_block {
                 for y in y_counter..(y_counter + layer.height) {
                     for x in 0..16 {
@@ -33,8 +33,7 @@ impl WorldGenerator for SuperflatWorldGenerator {
                     }
                 }
             } else {
-                // Skip this layer
-                log::warn!("Failed to generate layer: unknown block {}", layer.block);
+                log::warn!("Failed to generate layer: unknown block {}. Skipping layer...", layer.block);
             }
 
             y_counter += layer.height;

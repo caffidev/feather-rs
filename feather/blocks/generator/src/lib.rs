@@ -564,6 +564,13 @@ fn generate_block_serializing_fns(blocks: &Blocks) -> Vec<TokenStream> {
         }
     });
 
+    fns.push(quote! {
+        #[doc = "Attempts to convert a block name to a block with default property values."]
+        pub fn from_name(name: &str) -> Option<Self> {
+            from_identifier(format!("minecraft:{}", name))
+        }
+    });
+
     fns
 }
 

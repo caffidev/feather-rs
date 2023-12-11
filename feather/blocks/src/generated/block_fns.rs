@@ -29090,12 +29090,8 @@ impl BlockId {
             "minecraft:infested_cobblestone" => Some(Self::infested_cobblestone()),
             "minecraft:infested_stone_bricks" => Some(Self::infested_stone_bricks()),
             "minecraft:infested_mossy_stone_bricks" => Some(Self::infested_mossy_stone_bricks()),
-            "minecraft:infested_cracked_stone_bricks" => {
-                Some(Self::infested_cracked_stone_bricks())
-            }
-            "minecraft:infested_chiseled_stone_bricks" => {
-                Some(Self::infested_chiseled_stone_bricks())
-            }
+            "minecraft:infested_cracked_stone_bricks" => Some(Self::infested_cracked_stone_bricks()),
+            "minecraft:infested_chiseled_stone_bricks" => Some(Self::infested_chiseled_stone_bricks()),
             "minecraft:brown_mushroom_block" => Some(Self::brown_mushroom_block()),
             "minecraft:red_mushroom_block" => Some(Self::red_mushroom_block()),
             "minecraft:mushroom_stem" => Some(Self::mushroom_stem()),
@@ -29188,12 +29184,8 @@ impl BlockId {
             "minecraft:chipped_anvil" => Some(Self::chipped_anvil()),
             "minecraft:damaged_anvil" => Some(Self::damaged_anvil()),
             "minecraft:trapped_chest" => Some(Self::trapped_chest()),
-            "minecraft:light_weighted_pressure_plate" => {
-                Some(Self::light_weighted_pressure_plate())
-            }
-            "minecraft:heavy_weighted_pressure_plate" => {
-                Some(Self::heavy_weighted_pressure_plate())
-            }
+            "minecraft:light_weighted_pressure_plate" => Some(Self::light_weighted_pressure_plate()),
+            "minecraft:heavy_weighted_pressure_plate" => Some(Self::heavy_weighted_pressure_plate()),
             "minecraft:comparator" => Some(Self::comparator()),
             "minecraft:daylight_detector" => Some(Self::daylight_detector()),
             "minecraft:redstone_block" => Some(Self::redstone_block()),
@@ -29224,16 +29216,12 @@ impl BlockId {
             "minecraft:white_stained_glass_pane" => Some(Self::white_stained_glass_pane()),
             "minecraft:orange_stained_glass_pane" => Some(Self::orange_stained_glass_pane()),
             "minecraft:magenta_stained_glass_pane" => Some(Self::magenta_stained_glass_pane()),
-            "minecraft:light_blue_stained_glass_pane" => {
-                Some(Self::light_blue_stained_glass_pane())
-            }
+            "minecraft:light_blue_stained_glass_pane" => Some(Self::light_blue_stained_glass_pane()),
             "minecraft:yellow_stained_glass_pane" => Some(Self::yellow_stained_glass_pane()),
             "minecraft:lime_stained_glass_pane" => Some(Self::lime_stained_glass_pane()),
             "minecraft:pink_stained_glass_pane" => Some(Self::pink_stained_glass_pane()),
             "minecraft:gray_stained_glass_pane" => Some(Self::gray_stained_glass_pane()),
-            "minecraft:light_gray_stained_glass_pane" => {
-                Some(Self::light_gray_stained_glass_pane())
-            }
+            "minecraft:light_gray_stained_glass_pane" => Some(Self::light_gray_stained_glass_pane()),
             "minecraft:cyan_stained_glass_pane" => Some(Self::cyan_stained_glass_pane()),
             "minecraft:purple_stained_glass_pane" => Some(Self::purple_stained_glass_pane()),
             "minecraft:blue_stained_glass_pane" => Some(Self::blue_stained_glass_pane()),
