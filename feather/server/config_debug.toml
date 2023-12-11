@@ -12,7 +12,7 @@ online_mode = false
 motd = "A Debug Feather server"
 max_players = 16
 default_gamemode = "creative"
-force_gamemode = false
+enforce_gamemode = false
 view_distance = 12
 
 [log]
