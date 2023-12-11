@@ -11,6 +11,18 @@ If you want to work on the codebase, please keep the following in mind:
 ## Notes to your code
 For notes to your code check the Checklist from [`pull_request_template.md`](.github/pull_request_template.md)
 
+## Semantic versioning
+When bumping version, you MUST follow this: https://semver.org/
+
+## Commits
+When committing you MUST follow this (not strictly, but MUST):
+https://www.conventionalcommits.org/ru/v1.0.0-beta.2/
+
+## Comments
+You don't need to do ambigious comments, kiss.
+They SHOULD start from capital letters, although some arguments are exception.
+They SHOULD also be on other line, where code is missing.
+
 ## Naming Quantities
 Variables intended to hold quantities should be written with the `_count`/`_amount` suffix instead of the `num_` prefix. It is for differianting numeric types and amounts.
 
