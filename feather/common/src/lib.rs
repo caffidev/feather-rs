@@ -30,6 +30,7 @@ pub use chat::ChatBox;
 
 pub mod entities;
 
+pub mod block_break;
 pub mod interactable;
 
 /// Registers gameplay systems with the given `Game` and `SystemExecutor`.

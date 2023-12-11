@@ -9,6 +9,7 @@ use common::{
     entities::player::HotbarSlot,
     view::View,
     window::BackingWindow,
+    block_break::BlockBreaker,
     ChatBox, Game, Window,
 };
 use ecs::{SysResult, SystemExecutor};
@@ -110,6 +111,7 @@ fn accept_new_player(game: &mut Game, server: &mut Server, client_id: ClientId) 
             Position::default().chunk(),
             server.options.view_distance,
         ))
+        .add(BlockBreaker::None)
         .add(gamemode)
         .add(previous_gamemode)
         .add(Name::new(client.username()))
