@@ -209,9 +209,9 @@ pub fn handle_interact_entity(
                 target: EntityId(target.id() as u64),
                 ty: InteractionType::Attack,
                 target_pos: Some(Vec3f::new(
-                    target_x as f32,
-                    target_y as f32,
-                    target_z as f32,
+                    target_x,
+                    target_y,
+                    target_z,
                 )),
                 hand: Some(hand),
                 sneaking: packet.sneaking,
