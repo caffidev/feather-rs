@@ -43,8 +43,7 @@ struct Args {
 
 fn idlist(src: &str) -> Result<Vec<u32>, String> {
     src.split(',')
-        .map(|n| u32::from_str_radix(n, 16)
-        .map_err(|e| e.to_string()))
+        .map(|n| u32::from_str_radix(n, 16).map_err(|e| e.to_string()))
         .collect()
 }
 
@@ -62,7 +61,7 @@ impl core::str::FromStr for ConnectionSide {
             "client" => Ok(Self::Client),
             "server" => Ok(Self::Server),
             "both" => Ok(Self::Both),
-            _ => Err("expected 'client', 'server', or 'both")
+            _ => Err("expected 'client', 'server', or 'both"),
         }
     }
 }

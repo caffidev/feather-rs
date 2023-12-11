@@ -12,7 +12,7 @@ pub struct Options {
 
     /// The server favicon.
     pub favicon: Option<Favicon>,
-    
+
     /// The server MOTD.
     pub motd: String,
 

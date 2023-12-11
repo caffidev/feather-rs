@@ -7,7 +7,7 @@ pub type TableEntry = ArrayString<[u8; TABLE_WIDTH]>;
 pub type Table = ArrayVec<[TableEntry; TABLE_WIDTH]>;
 
 #[derive(Debug, Serialize, Deserialize)]
-#[serde(tag="type")]
+#[serde(tag = "type")]
 pub enum Recipe<'a> {
     #[serde(rename = "minecraft:crafting_shaped")]
     Shaped {

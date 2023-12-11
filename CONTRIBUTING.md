@@ -3,8 +3,8 @@
 Feather is an ambitious project, and contributions are always welcome!
 
 If you want to work on the codebase, please keep the following in mind:
-* Run `rustfmt` on your code before committing. The CI build will fail if rustfmt detects formatting errors.
-* Run [`clippy`](https://github.com/rust-lang/rust-clippy) on your code and fix any warnings it gives. Clippy can detect common mistakes, and as with formatting, the build will fail if there are Clippy warnings.
+* Run `rustfmt` on your code before committing to main. The CI build will fail if rustfmt detects formatting errors.
+* Run [`clippy`](https://github.com/rust-lang/rust-clippy) on your code before commiting to main and fix any warnings it gives. Clippy can detect common mistakes, and as with formatting, the build will fail if there are Clippy warnings.
 * Where possible and necessary, please write tests.
 * Run `cargo test` before committing to ensure you have not broken anything (you could change something, and buh you broke vanilla code whatsoever)
 

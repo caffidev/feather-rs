@@ -78,7 +78,7 @@ impl InventorySlot {
             (index - SLOT_HOTBAR_OFFSET) as i8
         } else if index == SLOT_OFFHAND {
             -106
-        } else if (SLOT_ARMOR_MIN..(SLOT_ARMOR_MAX+1)).contains(&index) {
+        } else if (SLOT_ARMOR_MIN..(SLOT_ARMOR_MAX + 1)).contains(&index) {
             ((SLOT_ARMOR_MAX - index) + 100) as i8
         } else if (SLOT_INVENTORY_OFFSET..SLOT_INVENTORY_OFFSET + INVENTORY_SIZE).contains(&index) {
             index as i8

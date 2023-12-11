@@ -1,8 +1,8 @@
-use base::{ValidBlockPosition, ItemStack};
-use ecs::{SystemExecutor, SysResult, EntityBuilder};
+use base::{ItemStack, ValidBlockPosition};
+use ecs::{EntityBuilder, SysResult, SystemExecutor};
 use quill_common::entity_init::EntityInit;
 
-use crate::{Game,World};
+use crate::{Game, World};
 
 pub type BlockBreaker = Option<ActiveBlockBreaker>;
 pub struct ActiveBlockBreaker {
@@ -21,12 +21,12 @@ impl ActiveBlockBreaker {
         let target_block = match game.block(self.position) {
             Some(b) => b,
             // Returns Error
-            None => anyhow::bail!("Cannot break unloaded block!") 
+            None => anyhow::bail!("Cannot break unloaded block!"),
         };
         game.break_block(self.position);
         if let Some(_item_drop) = base::Item::from_name(target_block.kind().name()) {
             if !self.drop_item {
-                return Ok(())
+                return Ok(());
             }
             let mut item_entity = EntityBuilder::new();
             crate::entities::item::build_default(&mut item_entity);
@@ -36,10 +36,12 @@ impl ActiveBlockBreaker {
         Ok(())
     }
 
-    pub fn new_player(_world: &mut World,
+    pub fn new_player(
+        _world: &mut World,
         block_pos: ValidBlockPosition,
         _mainhand: Option<&ItemStack>,
-        _offhand: Option<&ItemStack>) -> Option<Self> {
+        _offhand: Option<&ItemStack>,
+    ) -> Option<Self> {
         // TODO: implement block breaking
         Some(Self {
             position: block_pos,
@@ -64,10 +66,7 @@ fn process_block_breaking(game: &mut Game) -> SysResult {
     }
     for entity in break_queue.into_iter() {
         // Set Block Breakers to None
-        let breaker = {
-            game.ecs.get_mut::<BlockBreaker>(entity)?.take()
-                .unwrap()
-        };
+        let breaker = { game.ecs.get_mut::<BlockBreaker>(entity)?.take().unwrap() };
         breaker.break_block(game)?;
     }
     Ok(())

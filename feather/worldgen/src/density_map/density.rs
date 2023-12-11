@@ -157,7 +157,7 @@ fn generate_density(chunk: ChunkPosition, biomes: &NearbyBiomes, seed: u64) -> V
 
 /// Elevation height field, used to weight
 /// the averaging of nearby biome heights.
-const fn elevation() -> [[f32;19]; 19] {
+const fn elevation() -> [[f32; 19]; 19] {
     let mut array = [[0.0f32; 19]; 19];
     let mut x = 0;
 
@@ -171,12 +171,13 @@ const fn elevation() -> [[f32;19]; 19] {
             z_squared *= z_squared;
 
             array[x][z] = SoftF32(10.0)
-                .div((
-                    SoftF32(x_squared as f32)
+                .div(
+                    (SoftF32(x_squared as f32)
                         .add(SoftF32(z_squared as f32))
                         .add(SoftF32(0.2)))
                     .sqrt(),
-                ).to_f32();
+                )
+                .to_f32();
             z += 1;
         }
         x += 1;

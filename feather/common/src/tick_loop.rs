@@ -1,5 +1,5 @@
-use std::time::Instant;
 use std::backtrace::Backtrace;
+use std::time::Instant;
 
 use base::TICK_DURATION;
 

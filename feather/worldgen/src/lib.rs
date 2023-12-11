@@ -367,12 +367,11 @@ impl BiomeGenerator for StaticBiomeGenerator {
 pub fn seed_from_string(s: &str) -> u64 {
     s.parse().unwrap_or_else(|_| {
         if s.is_empty() {
-            rand::random() 
+            rand::random()
         } else {
             // Java's implementation of Java.String#Hashcode
             s.chars()
-                .fold(0i32, |val, ch|
-                val.wrapping_mul(31).wrapping_add(ch as i32))
+                .fold(0i32, |val, ch| val.wrapping_mul(31).wrapping_add(ch as i32))
                 as i64
         }
     }) as u64

@@ -1,11 +1,11 @@
 //! Implementation of the Minecraft chat component format.
 
+use crate::ansi::AnsiStyle;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 use std::borrow::Cow;
 use std::fmt::{self, Display, Formatter};
 use std::str::FromStr;
 use uuid::Uuid;
-use crate::ansi::AnsiStyle;
 
 pub mod markdown;
 
@@ -177,7 +177,7 @@ impl From<Keybind> for String {
             Keybind::Hotbar7 => "hotbar7".to_string(),
             Keybind::Hotbar8 => "hotbar8".to_string(),
             Keybind::Hotbar9 => "hotbar9".to_string(),
-            Keybind::Custom(s) => s.to_string()
+            Keybind::Custom(s) => s.to_string(),
         }
     }
 }
@@ -306,9 +306,15 @@ pub enum Translate {
 impl Translate {
     fn to_text(&self, args: &Vec<Text>, style: &String) -> String {
         match self {
-            Translate::ChatTypeText => format!("<{}{}> {}", args[0].as_ansi(), style, args[1].as_ansi()),
-            Translate::MultiplayerPlayerJoined => format!("{}{} joined the game", args[0].as_ansi(), style),
-            Translate::MultiplayerPlayerLeft => format!("{}{} left the game", args[0].as_ansi(), style),
+            Translate::ChatTypeText => {
+                format!("<{}{}> {}", args[0].as_ansi(), style, args[1].as_ansi())
+            }
+            Translate::MultiplayerPlayerJoined => {
+                format!("{}{} joined the game", args[0].as_ansi(), style)
+            }
+            Translate::MultiplayerPlayerLeft => {
+                format!("{}{} left the game", args[0].as_ansi(), style)
+            }
             Translate::Custom(name) => {
                 let mut args_strings: String = String::new();
 
@@ -318,7 +324,10 @@ impl Translate {
 
                 args_strings.push(' ');
 
-                format!("<Unknown Translation: '{}' with args: [{}]>", name, args_strings)
+                format!(
+                    "<Unknown Translation: '{}' with args: [{}]>",
+                    name, args_strings
+                )
             }
         }
     }
@@ -514,7 +523,6 @@ impl TextValue {
     pub fn nbt<A: Into<nbt::Blob>>(nbt: A) -> Self {
         TextValue::Nbt { nbt: nbt.into() }
     }
-    
 }
 
 #[serde_with::skip_serializing_none]
@@ -563,7 +571,7 @@ impl TextComponent {
             style_type = AnsiStyle::underline()
         }
 
-        let mut style =style_type.white();
+        let mut style = style_type.white();
 
         if self.color.is_some() {
             let color = self.color.as_ref().unwrap();
@@ -589,22 +597,31 @@ impl TextComponent {
             }
         }
 
-
-        let content = if let TextValue::Text {text} = self.clone().value {
+        let content = if let TextValue::Text { text } = self.clone().value {
             String::from(text)
-        } else if let TextValue::Translate {translate, with} = self.clone().value {
+        } else if let TextValue::Translate { translate, with } = self.clone().value {
             translate.to_text(&with, &style)
-        } else if let TextValue::Score {value, name, objective} = self.clone().value {
+        } else if let TextValue::Score {
+            value,
+            name,
+            objective,
+        } = self.clone().value
+        {
             if value.is_some() {
-                format!("<Score @ {}:{}, Value: {}>", name, objective, value.unwrap())
+                format!(
+                    "<Score @ {}:{}, Value: {}>",
+                    name,
+                    objective,
+                    value.unwrap()
+                )
             } else {
                 format!("<Score @ {}:{}>", objective, name)
             }
-        } else if let TextValue::Selector {selector} = self.clone().value {
+        } else if let TextValue::Selector { selector } = self.clone().value {
             format!("{}", selector)
-        } else if let TextValue::Keybind {keybind} = self.clone().value {
+        } else if let TextValue::Keybind { keybind } = self.clone().value {
             format!("<Keybind: {}>", String::from(keybind))
-        } else if let TextValue::Nbt {nbt} = self.clone().value {
+        } else if let TextValue::Nbt { nbt } = self.clone().value {
             format!("<NBT: {}>", nbt)
         } else {
             panic!("Unsupported TextValue")
@@ -612,7 +629,7 @@ impl TextComponent {
 
         format!("{}{}{}", &style, content, AnsiStyle::reset())
     }
-} 
+}
 pub enum Reset {
     Color,
     Style,

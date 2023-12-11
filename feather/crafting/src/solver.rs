@@ -1,6 +1,6 @@
 use crate::{
     recipe::{Recipe, ShapedRecipe, ShapelessRecipe},
-    Grid, TABLE_SIZE, TABLE_WIDTH
+    Grid, TABLE_SIZE, TABLE_WIDTH,
 };
 use ahash::AHashMap;
 use arrayvec::ArrayVec;
@@ -15,7 +15,7 @@ pub struct Solver {
     shaped: AHashMap<Grid, ItemStack>,
     /// Mapping from the input set of ingredients for a shapeless
     /// recipe to the output stack.
-    /// 
+    ///
     /// Input sets should be sorted using the `Ord` impl for `ItemStack`.
     shapeless: AHashMap<ArrayVec<[Item; TABLE_SIZE]>, ItemStack>,
 }
@@ -33,20 +33,21 @@ impl Solver {
 
         // Try shaped first, then shapeless lookup.
         if let Some(output) = self.shaped.get(input).cloned() {
-            return Some(output)
+            return Some(output);
         } else {
             let mut inputs = ArrayVec::new();
 
-            input.iter()
+            input
+                .iter()
                 .flatten()
                 .filter_map(|slot| *slot)
                 .for_each(|item| inputs.push(item));
             inputs.sort_unstable();
 
             if let Some(output) = self.shapeless.get(&inputs).cloned() {
-                return Some(output)
+                return Some(output);
             } else {
-                return None
+                return None;
             }
         }
     }
@@ -73,13 +74,13 @@ impl Solver {
 pub fn normalize(grid: &mut Grid) {
     // Find number of empty upper rows
     let mut y = 0;
-    while is_empty(grid, (0,y), (1,y), (2,y)) && y < TABLE_WIDTH - 1{
-        y+= 1;
+    while is_empty(grid, (0, y), (1, y), (2, y)) && y < TABLE_WIDTH - 1 {
+        y += 1;
     }
 
     // Find number of empty leftmost columns
     let mut x = 0;
-    while is_empty(grid, (x,0), (x,1), (x,2)) && x < TABLE_WIDTH - 1 {
+    while is_empty(grid, (x, 0), (x, 1), (x, 2)) && x < TABLE_WIDTH - 1 {
         x += 1;
     }
 
@@ -89,7 +90,7 @@ pub fn normalize(grid: &mut Grid) {
 /// Translates a crafting grid by the given amount
 /// upward and leftward.
 /// Items translated outside of the grid will be eliminated.
-pub fn translate(grid: &mut Grid, x: usize, y:usize) {
+pub fn translate(grid: &mut Grid, x: usize, y: usize) {
     // Translate to the left
     grid.copy_within(x..TABLE_WIDTH, 0);
 

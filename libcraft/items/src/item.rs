@@ -4926,7 +4926,7 @@ impl Item {
     /// Gets a `Item` by its `identifier`.
     pub fn from_identifier(identifier: &str) -> Option<Self> {
         // TODO: add non-minecraft support
-        return Item::from_name(&identifier.replace("minecraft:", ""))
+        return Item::from_name(&identifier.replace("minecraft:", ""));
     }
 }
 #[allow(warnings)]

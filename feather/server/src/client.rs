@@ -19,7 +19,10 @@ use common::{
     Window,
 };
 use libcraft_items::InventorySlot;
-use packets::server::{Particle, SetSlot, SpawnLivingEntity, UpdateLight, WindowConfirmation, PlayerListHeaderAndFooter};
+use packets::server::{
+    Particle, PlayerListHeaderAndFooter, SetSlot, SpawnLivingEntity, UpdateLight,
+    WindowConfirmation,
+};
 use protocol::packets::server::{
     ChangeGameState, EntityPosition, EntityPositionAndRotation, EntityTeleport, GameStateChange,
     HeldItemChange, PlayerAbilities,
@@ -337,7 +340,7 @@ impl Client {
         log::trace!("Sending PlayerListHeaderAndFooter ({},{})", header, footer);
         self.send_packet(PlayerListHeaderAndFooter {
             header: header.to_string(),
-            footer: footer.to_string()
+            footer: footer.to_string(),
         })
     }
 

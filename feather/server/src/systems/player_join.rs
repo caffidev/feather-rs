@@ -5,11 +5,11 @@ use log::debug;
 use base::anvil::player::PlayerAbilities;
 use base::{Gamemode, Inventory, ItemStack, Position, Text};
 use common::{
+    block_break::BlockBreaker,
     chat::{ChatKind, ChatPreference},
     entities::player::HotbarSlot,
     view::View,
     window::BackingWindow,
-    block_break::BlockBreaker,
     ChatBox, Game, Window,
 };
 use ecs::{SysResult, SystemExecutor};

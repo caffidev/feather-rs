@@ -4,7 +4,6 @@ use arrayvec::ArrayVec;
 use libcraft_items::{Item, ItemStack};
 use std::collections::BTreeMap;
 
-
 #[derive(Clone, Debug)]
 pub struct ShapedRecipe {
     pub input: Grid,
@@ -30,8 +29,10 @@ pub fn convert(model: model::Recipe) -> anyhow::Result<Recipe> {
             key,
             output,
         } => convert_shaped(pattern, key, output),
-        model::Recipe::Shapeless { ingredients, output }
-          => convert_shapeless(&ingredients, output),    
+        model::Recipe::Shapeless {
+            ingredients,
+            output,
+        } => convert_shapeless(&ingredients, output),
     }
 }
 
@@ -55,7 +56,7 @@ fn convert_shaped(
             }
         }
     }
-    
+
     solver::normalize(&mut input);
 
     let output = convert_output(&output)?;
@@ -63,8 +64,7 @@ fn convert_shaped(
     Ok(Recipe::Shaped(ShapedRecipe { input, output }))
 }
 
-fn convert_shapeless(ingredients: &[model::Key], output: model::Output)
--> anyhow::Result<Recipe> {
+fn convert_shapeless(ingredients: &[model::Key], output: model::Output) -> anyhow::Result<Recipe> {
     let mut input = ArrayVec::new();
 
     for ingredient in ingredients {
@@ -79,7 +79,7 @@ fn convert_shapeless(ingredients: &[model::Key], output: model::Output)
 
     let output = convert_output(&output)?;
 
-    Ok(Recipe::Shapeless(ShapelessRecipe { input, output}))
+    Ok(Recipe::Shapeless(ShapelessRecipe { input, output }))
 }
 
 fn convert_key(key: &model::Key) -> anyhow::Result<Option<Item>> {

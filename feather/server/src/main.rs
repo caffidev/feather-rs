@@ -1,12 +1,12 @@
-use std::{cell::RefCell, path::Path, rc::Rc, sync::Arc, env};
+use std::{cell::RefCell, env, path::Path, rc::Rc, sync::Arc};
 
 use anyhow::Context;
 use base::anvil::level::SuperflatGeneratorOptions;
 use common::{Game, TickLoop, World};
 use ecs::SystemExecutor;
-use utils::enable_ansi_support;
 use feather_server::{config::Config, Server};
 use plugin_host::PluginManager;
+use utils::enable_ansi_support;
 use worldgen::{ComposableGenerator, SuperflatWorldGenerator, VoidWorldGenerator, WorldGenerator};
 
 mod logging;
@@ -26,14 +26,17 @@ async fn main() -> anyhow::Result<()> {
     match enable_ansi_support() {
         Ok(_) => {
             log::trace!("If Windows, ANSI was enabled")
-        },
+        }
         Err(_) => {
             log::warn!("Could not enable ANSI code support on your OS");
         }
     }
 
     if was_config_created {
-        log::info!("Created default config to {}", env::current_dir()?.join(path).to_str().unwrap());
+        log::info!(
+            "Created default config to {}",
+            env::current_dir()?.join(path).to_str().unwrap()
+        );
     }
     log::info!("Loaded config");
 
