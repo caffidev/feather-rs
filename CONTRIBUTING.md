@@ -8,6 +8,30 @@ If you want to work on the codebase, please keep the following in mind:
 * Where possible and necessary, please write tests.
 * Run `cargo test` before committing to ensure you have not broken anything (you could change something, and buh you broke vanilla code whatsoever)
 
+## Proper base
+When opening a PR, please make sure your branch targets the latest release branch, in this case it would be main. Also make sure your branch is even with the target branch, to avoid unnecessary surprises.
+
+## Proper titles
+When opening issues, make sure the title reflects the purpose of the issue or the pull request. Prefer past tense, and be brief. Further description belongs inside the issue or PR.
+
+## Descriptive changes
+
+We require the commits describe the change made. It can be a short description. If you fixed or resolved an open issue, please reference it by using the # notation.
+
+Examples of good commit messages:
+
+    Fixed a potential memory leak with cache entities. Fixes #142.
+    Implemented new command extension. Resolves #169.
+    Changed message cache behaviour. It's now global instead of per-channel.
+    Fixed a potential NRE.
+
+    Changed message cache behaviour:
+
+    - Cache itself is now a ring buffer.
+
+## Code style
+You should follow all rust and clippy recommendations, but not necessary.
+
 ## Notes to your code
 For notes to your code check the Checklist from [`pull_request_template.md`](.github/pull_request_template.md)
 
