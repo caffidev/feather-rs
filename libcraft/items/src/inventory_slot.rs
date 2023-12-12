@@ -199,6 +199,7 @@ impl InventorySlot {
             InventorySlot::Empty => None,
         }
     }
+
     /// Convert a reference to `self` into an `Option<&ItemStack>`
     #[must_use]
     pub const fn option_ref(&self) -> Option<&ItemStack> {
@@ -207,6 +208,7 @@ impl InventorySlot {
             InventorySlot::Empty => None,
         }
     }
+
     /// Convert a mutable reference to `self` into an `Option<&mut ItemStack>`
     #[must_use]
     pub fn option_mut(&mut self) -> Option<&mut ItemStack> {
@@ -215,16 +217,19 @@ impl InventorySlot {
             InventorySlot::Empty => None,
         }
     }
+
     /// Map `f` over the inner item stack, optionally returning the resulting value.
     #[must_use]
     pub fn map<F: FnOnce(ItemStack) -> U, U>(self, f: F) -> Option<U> {
         self.into_option().map(f)
     }
+
     /// Map `f` over the inner item stack, optionally returning the resulting value.
     #[must_use]
     pub fn map_ref<F: FnOnce(&ItemStack) -> U, U>(&self, f: F) -> Option<U> {
         self.option_ref().map(f)
     }
+    
     /// Map `f` over the inner item stack, optionally returning the resulting value.
     #[must_use]
     pub fn map_mut<F: FnOnce(&mut ItemStack) -> U, U>(&mut self, f: F) -> Option<U> {
