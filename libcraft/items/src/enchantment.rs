@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 /// An enchantment attached to an item.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Enchantment {
-    /// The type of the enchantment.
+    /// The kind of the enchantment, contains an id.
     #[serde(rename = "id")]
     kind: EnchantmentKind,
     /// Enchantment level, represented by an `i8` for vanilla compatibility
@@ -66,90 +66,90 @@ impl Enchantment {
 #[serde(rename_all = "snake_case")]
 pub enum EnchantmentKind {
     /// Increases underwater mining speed.
-    AquaAffinity,
+    AquaAffinity = 6,
     /// Increases damage and applies Slowness IV to arthropod
     /// mobs (spiders, cave spiders, silverfish, endermites and bees).
-    BaneOfArthropods,
+    BaneOfArthropods = 14,
     /// Reduces explosion damage and knockback.
-    BlastProtection,
+    BlastProtection = 3,
     /// During thunderstorms, trident summons a lightning bolt
     /// on the target when hitting it.
-    Channeling,
+    Channeling = 32,
     /// Increases damage and shield stunning.
-    Cleaving,
+    // Cleaving, bedrock edition - planned to be added
     /// Items cannot be removed from armor slots.
-    CurseOfBinding,
+    BindingCurse = 10,
     /// Item disappears on death.
-    CurseOfVanishing,
+    VanishingCurse = 37,
     /// Increased underwater movement speed.
-    DepthStrider,
+    DepthStrider = 8,
     /// Increases tool speed, as well as the chance
     /// for axes to disable shields.
-    Efficiency,
+    Efficiency = 19,
     /// Reduces fall damage.
-    FeatherFalling,
+    FeatherFalling = 2,
     /// Sets target on fire.
-    FireAspect,
+    FireAspect = 16,
     /// Reduces fire damage and burn time.
     /// Mutually exclusive with other protections.
-    FireProtection,
+    FireProtection = 1,
     /// Arrows shot are ignited and deal fire damage to the target.
-    Flame,
+    Flame = 25,
     /// Increases the amount of block drops.
-    Fortune,
+    Fortune = 22,
     /// Allows the player to walk on water by
     /// freezing the water under their feet.
-    FrostWalker,
+    FrostWalker = 9,
     /// Increases damage against aquatic mobs.
-    Impaling,
+    Impaling = 30,
     /// Prevents consumption of arrows.
-    Infinity,
+    Infinity = 26,
     /// Increases knockback.
-    Knockback,
+    Knockback = 15,
     /// Increases mob loot.
-    Looting,
+    Looting = 17,
     /// Trident returns after being thrown.
-    Loyalty,
+    Loyalty = 29,
     /// Increases rate of good loot (enchanting books, etc.)
-    LuckOfTheSea,
+    LuckOfTheSea = 27,
     /// Decreases time for bites.
-    Lure,
+    Lure = 28,
     /// Repairs the item using experience.
-    Mending,
+    Mending = 36,
     /// Fires 3 arrows at the same time.
-    Multishot,
+    Multishot = 33,
     /// Arrows pierce entities, allowing for arrows to pierce
     /// through stacks of mobs.
-    Piercing,
+    Piercing = 35,
     /// Increases arrow damage.
-    Power,
+    Power = 23,
     /// Reduces damage from projectiles.
-    ProjectileProtection,
+    ProjectileProtection = 4,
     /// Reduces generic damage.
-    Protection,
+    Protection = 0,
     /// Increases arrow knockback.
-    Punch,
+    Punch = 24,
     /// Decreases crossbow charging time.
-    QuickCharge,
+    QuickCharge = 34,
     /// Extends underwater breathing time.
-    Respiration,
+    Respiration = 5,
     /// Trident launches player with itself when thrown
     /// while in water or rain.
-    Riptide,
+    Riptide = 31,
     /// Increases melee damage.
-    Sharpness,
+    Sharpness = 12,
     /// Mined blocks drop themselves.
-    SilkTouch,
+    SilkTouch = 20,
     /// Increases damage to the undead.
-    Smite,
+    Smite = 13,
     /// Increases movement speed on soul sand and soul soil.
-    SoulSpeed,
+    SoulSpeed = 11,
     /// Increases sweeping attack damage.
-    SweepingEdge,
+    Sweeping = 18,
     /// Taking damage causes the attacker to also take damage.
-    Thorns,
+    Thorns = 7,
     /// Increases sneaking speed.
     // SwiftSneak, 1.19 v.
     /// Reduces durability damage.
-    Unbreaking,
+    Unbreaking = 21,
 }
